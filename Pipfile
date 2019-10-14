@@ -8,6 +8,8 @@ autopep8 = "*"
 
 [packages]
 bcrypt = "*"
+flask = "*"
+instagram-private-api = "*"
 
 [requires]
 python_version = "3.7"
