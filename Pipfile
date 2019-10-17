@@ -10,6 +10,10 @@ autopep8 = "*"
 bcrypt = "*"
 flask = "*"
 instagram-private-api = "*"
+requests-oauthlib = "*"
+pymongo = "*"
+pyopenssl = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

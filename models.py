@@ -31,8 +31,26 @@ class User(object):
 
 
 class Network(object):
-    def __init__(self):
-        pass
+    def __init__(self, affinnity, interations, User):
+        self.affinity = affinity
+        self.interations = interactions
+        self.relation = User
+        self.network = []
+
+    def set_interations(self, num):
+        self.interations = num
+
+    def get_interations(self):
+        return self.interations
+
+    def set_affinity(self, num):
+        self.affinity = num
+
+    def get_affinity(self):
+        return self.affinity
+
+   def add_to_network(self, User)
+
 
 
 class assests(object):

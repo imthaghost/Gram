@@ -6,5 +6,5 @@ user_name = 'foreignzeus'
 password = getpass()
 
 api = Client(user_name, password)
-results = api.feed_timeline()
+results = api.feed_liked()
 print(results)
