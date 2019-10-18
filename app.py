@@ -88,12 +88,70 @@ def login():
         me.set_name(api.user_info(me.get_id())['user']['full_name'])
         # set rank token
         me.set_rank_token(api.generate_uuid())
+        #####################!You need at least 32 cores to run this fuck shit!############################################
+        # test = []
+        # results = api.user_followers(me.id, me.rank_token)
+        # test.extend(results.get('users', []))
+        # next_max_id = results.get('next_max_id')
+        # while next_max_id:
+        #     results = api.user_followers(
+        #         me.id, me.rank_token, max_id=next_max_id)
+        #     test.extend(results.get('users', []))
+        #     if len(test) >= 8000:
+        #         break
+        #     next_max_id2 = results.get('next_max_id')
+        # test2 = []
+        # results2 = api.user_following(me.id, me.rank_token)
+        # test2.extend(results2.get('users', []))
+        # next_max_id2 = results2.get('next_max_id')
+        # while next_max_id2:
+        #     results2 = api.user_following(
+        #         me.id, me.rank_token, max_id=next_max_id)
+        #     test2.extend(results2.get('users', []))
+        #     if len(test2) >= 8000:
+        #         break
+        #     next_max_id2 = results2.get('next_max_id')
+
+        # relations = []
+        # for user in test:
+        #      # grab followed user id
+        #     followed_id = user['pk']
+        #     followed_name = user['full_name']
+        #     relations.append((
+        #         me.get_id(), followed_id, me.get_full_name(), followed_name))
+        #     # if test2.get('users') is not None:
+        #     for users in test2:
+        #         relations.append(
+        #             (followed_id, users['pk'], followed_name, users['full_name']))
+        # df = pd.DataFrame(relations, columns=[
+        #     'src_id', 'dst_id', 'src_name', 'dst_name'])
+        # key = os.environ.get('graphistry_key')
+        # graphistry.register(key=key)
+        # graph = graphistry.bind(source='src_name',
+        #                         destination='dst_name').edges(df).plot()
+        #####################!You need at least 32 cores to run this fuck shit!############################################
         # followers
-        followers = api.user_followers(me.get_id(), me.get_rank_token())
+        followers = api.user_followers(
+            me.get_id(), me.get_rank_token())
         # following
         following = api.user_following(me.get_id(), me.get_rank_token())
         # set the likes
         me.set_likes(api.feed_liked())
+        print(me.likes)
+        # set followers count
+        count = 0
+        for user in followers['users']:
+            count += 1
+        me.set_follower_count(count)
+        val = 0
+        for user in following['users']:
+            val += 1
+        # set following count
+        me.set_following_count(val)
+        # set picture
+        me.set_picture(api.user_info(me.id)['user']['profile_pic_url'])
+        # wtf is this
+        # print(api.explore())
         # follow relationtionships
         follow_relationships = []
         # create network
@@ -110,14 +168,9 @@ def login():
                 for users in followers['users']:
                     follow_relationships.append(
                         (followed_user_id, users['pk'], followed_user_name, users['full_name']))
-
         me.set_network(follow_relationships)
-        # for src in follow_relationships:
-
-        # print(follow_relationships)
-        # print(me.network)
         df = pd.DataFrame(follow_relationships, columns=[
-                          'src_id', 'dst_id', 'src_name', 'dst_name'])
+            'src_id', 'dst_id', 'src_name', 'dst_name'])
         key = os.environ.get('graphistry_key')
         graphistry.register(key=key)
         graph = graphistry.bind(source='src_name',
@@ -169,6 +222,33 @@ def somedata():
         tag_results.extend(results.get('results', []))
         has_more = results.get('has_more')
         rank_token = results.get('rank_token')
+
+        # test = []
+        # results = api.user_followers(me.id, me.rank_token)
+        # test.extend(results.get('users', []))
+        # next_max_id = results.get('next_max_id')
+        # while next_max_id:
+        #     results = api.user_followers(
+        #         me.id, me.rank_token, max_id=next_max_id)
+        #     test.extend(results.get('users', []))
+        #     if len(test) >= 8000:       # get only first 600 or so
+        #         break
+        #     next_max_id = results.get('next_max_id')
+
+        #     for user in following['users']:
+        #         # grab followed user id
+        #     followed_user_id = user['pk']
+        #     # grab followed user full name
+        #     followed_user_name = user['full_name']
+        #     # append my id, followed user id, my full name, followed user full name
+        #     follow_relationships.append(
+        #         (me.get_id(), followed_user_id, me.get_full_name(), followed_user_name))
+        #     # if you are following no one break
+        #     if following.get('users') is not None:
+        #         for users in followers['users']:
+        #             follow_relationships.append(
+        #                 (followed_user_id, users['pk'], followed_user_name, users['full_name']))
+
     print(json.dumps([t['name'] for t in tag_results], indent=2))
 
 

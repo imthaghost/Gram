@@ -23,6 +23,18 @@ class User(object):
     def __repr__(self):
         pass
 
+    def set_follower_count(self, num):
+        self.follower_count = int(num)
+
+    def get_follower_count(self):
+        return self.follower_count
+
+    def set_following_count(self, num):
+        self.following_count = int(num)
+
+    def get_following_count(self):
+        return self.following_count
+
     def set_username(self, username):
         self.username = str(username)
 
@@ -72,8 +84,8 @@ class User(object):
             'follower_count': self.follower_count,
             'following_count': self.following_count,
             'profile_picture': self.picture,
-            'full_name': self.full_name,
-            'likes': self.get_likes()
+            'full_name': self.full_name
+            # 'likes': self.get_likes()
         }
 
 
