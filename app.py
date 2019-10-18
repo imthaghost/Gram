@@ -8,7 +8,7 @@ import pandas as pd
 from models import User, Network, assests
 from tqdm import tqdm
 import graphistry
-from time import time
+import time
 # set flask name
 app = Flask(__name__)
 # portnum = 8080  # custom port number
