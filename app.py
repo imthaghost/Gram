@@ -159,7 +159,7 @@ def login():
             # wtf is this
             # print(api.explore())
             # follow relationtionships
-            api.story_viewers()
+            # api.story_viewers()
             follow_relationships = []
             # create network
             for user in tqdm(following['users']):
