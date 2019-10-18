@@ -19,9 +19,16 @@ class User(object):
         self.network = None
         self.picture = None
         self.likes = []
+        self.graph = None
 
     def __repr__(self):
         pass
+
+    def set_graph(self, Graph):
+        self.graph = Graph
+
+    def get_graph(self):
+        return self.graph
 
     def set_follower_count(self, num):
         self.follower_count = int(num)
@@ -83,9 +90,10 @@ class User(object):
             'is_active': self.is_active,
             'follower_count': self.follower_count,
             'following_count': self.following_count,
-            'profile_picture': self.picture,
-            'full_name': self.full_name
-            # 'likes': self.get_likes()
+            'profile_picture': self.get_picture(),
+            'full_name': self.get_full_name(),
+            'rank_token': self.get_rank_token(),
+            'graph': self.graph
         }
 
 

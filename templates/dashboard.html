@@ -92,7 +92,7 @@
 
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="static/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                            <img src="{{user['profile_picture']}}" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
                                {{user['full_name']}}<i class="mdi mdi-chevron-down"></i> 
                             </span>
@@ -106,16 +106,12 @@
                             </div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{url_for('delete')}}" class="dropdown-item notify-item">
                                 <i class="fe-user"></i>
-                                <span>My Account</span>
+                                <span>Delete Account</span>
                             </a>
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-settings"></i>
-                                <span>Settings</span>
-                            </a>
+                           
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
@@ -652,17 +648,17 @@
                                         </div>
                                     </div>
 
-                                    <h4 class="header-title mt-0 mb-3">Comments</h4>
+                                    <h4 class="header-title mt-0 mb-3">Story Views</h4>
 
                                     <div class="mt-1">
                                         <div class="float-left" dir="ltr">
                                             <input data-plugin="knob" data-width="64" data-height="64" data-fgColor="#675db7"
-                                                data-bgColor="#48525e" value="80"
+                                                data-bgColor="#48525e" value="0"
                                                 data-skin="tron" data-angleOffset="180" data-readOnly=true
                                                 data-thickness=".15"/>
                                         </div>
                                         <div class="text-right">
-                                            <h2 class="mt-3 pt-1 mb-1"> some val </h2>
+                                            <h2 class="mt-3 pt-1 mb-1"> 0 </h2>
                                             
                                         </div>
                                         <div class="clearfix"></div>
@@ -782,8 +778,8 @@
                             </div>  -->
 
                             <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-body" height="800"  width="1000">
+                                <div class="card" height="800"  width="1000" style=" width: 100%; height: 100%; min-height: 900px; min-width: 1200px">
+                                    <div class="card-body"  height="800"  width="1000" style=" width: 100%; height: 100%; min-height: 900px; min-width: 900px">
                                         <div class="card-widgets">
                                             <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
                                             <a data-toggle="collapse" href="#cardCollpase2" role="button" aria-expanded="false" aria-controls="cardCollpase2"><i class="mdi mdi-minus"></i></a>
@@ -791,9 +787,7 @@
                                         </div>
                                         <h4 class="header-title mb-0">My Network</h4>
 
-                                        <iframe src="https://labs.graphistry.com/graph/graph.html?dataset=PyGraphistry%2FJPY12MW3HP&type=vgraph&viztoken=810f9830fa382ffc60f240d36e977dd39ac69bb3&usertag=998fa6f0-pygraphistry-0.9.69&splashAfter=1571356160&info=true&workbook=48b8a82747e39685" height="800"  width="1000" 
-                                        
-                                        ></iframe>
+                                        <iframe src="{{user['graph']}}" height="800"  width="1000" style="border: 1px solid black; width: 100%; height: 100%; min-height: 900px; min-width: 900px" ></iframe>
                                         <!-- style="width:-webkit-fill-available" -->
                                     
                                 </div> <!-- end card-->
