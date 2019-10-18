@@ -71,10 +71,10 @@ def login():
                 return redirect(url_for('login'))
             except ClientChallengeRequiredError:
                 # redirect the user back to the login page if username and passwword fails
-                time.sleep(60)
+                pass
 
             except ClientCheckpointRequiredError:
-                time.sleep(60)
+                pass
 
             # set client agent
             api = Client(request.form['username'],
