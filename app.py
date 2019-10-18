@@ -65,16 +65,17 @@ def login():
         else:
             try:
                 # try logging in user
-                Client(request.form['username'], request.form['password'], proxy='http://127.0.0.1:8080')
+                Client(
+                    request.form['username'], request.form['password'], proxy='http://127.0.0.1:8080')
             except ClientLoginError:
                 return redirect(url_for('login'))
             except ClientChallengeRequiredError:
                 # redirect the user back to the login page if username and passwword fails
                 time.sleep(60)
-                continue
+
             except ClientCheckpointRequiredError:
                 time.sleep(60)
-                continue
+
             # set client agent
             api = Client(request.form['username'],
                          request.form['password'])
