@@ -1,13 +1,14 @@
 from flask import Flask, jsonify, redirect, url_for, render_template, request, session
 import os
 from pymongo import MongoClient
-from instagram_private_api import Client, ClientCompatPatch, ClientLoginError
+from instagram_private_api import Client, ClientCompatPatch, ClientLoginError, ClientCheckpointRequiredError, ClientChallengeRequiredError
 import json
 from bson import json_util
 import pandas as pd
 from models import User, Network, assests
 from tqdm import tqdm
 import graphistry
+from time import time
 # set flask name
 app = Flask(__name__)
 # portnum = 8080  # custom port number
@@ -64,10 +65,16 @@ def login():
         else:
             try:
                 # try logging in user
-                Client(request.form['username'], request.form['password'])
+                Client(request.form['username'], request.form['password'], proxy='http://127.0.0.1:8080')
             except ClientLoginError:
-                # redirect the user back to the login page if username and passwword fails
                 return redirect(url_for('login'))
+            except ClientChallengeRequiredError:
+                # redirect the user back to the login page if username and passwword fails
+                time.sleep(60)
+                continue
+            except ClientCheckpointRequiredError:
+                time.sleep(60)
+                continue
             # set client agent
             api = Client(request.form['username'],
                          request.form['password'])
@@ -276,5 +283,5 @@ def delete():
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
-    app.run(debug=True, host='0.0.0.0',
+    app.run(debug=True, host='127.0.0.1',
             port=os.environ.get('PORT', 8080))
