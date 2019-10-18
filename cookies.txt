@@ -1,4 +1,0 @@
-# HTTrack Website Copier Cookie File
-# This file format is compatible with Netscape cookies
-.colorlib.com	TRUE	/	FALSE	1999999999	__cfduid	d1c258c393109c39939190754c9f8fed71571259010
-
